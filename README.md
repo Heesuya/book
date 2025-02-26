@@ -4,7 +4,7 @@
 ### 1. `책 등록.gif`
 - 네이버 책 검색 API 연동하여 책 정보 간편하게 불러오기
 - 정보 바탕으로 수정가능
-![책 등록하기](https://github.com/Heesuya/book/raw/main/readme/책%20등록하기.gif)
+![책 등록](https://github.com/Heesuya/book/raw/main/readme/책%20등록.gif)
 
 ### 2. `검색 기능과 상세보기.gif`
 - 실시간으로 검색할 수 있는 검색기능
@@ -13,7 +13,7 @@
 
 ### 3. `수정하기기능.gif`
 - 원하는 정보로 수정 기능 
-![수정하기기능](https://github.com/Heesuya/book/raw/main/readme/책정보수정.gif)
+![수정하기기능](https://github.com/Heesuya/book/raw/main/readme/수정하기기능.gif)
 
 ### 4. `재고수정과 삭제 기능.gif`
 - 재고수량 설정
