@@ -29,3 +29,7 @@
 - **DB**: Oracle 11g
 - **Tool**: Visual Studio Code, STS, SQL Developer
 - **Collaboration**: GitHub, ERD
+
+
+aws s3 를 이용한 배포 주소
+http://my-first-book-story-dlqslek.s3-website.ap-northeast-2.amazonaws.com/
