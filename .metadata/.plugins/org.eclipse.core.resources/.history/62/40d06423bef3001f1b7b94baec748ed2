@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.book.model.dao.BookDao">
+	<insert id="insertBook">
+    	INSERT INTO books (title, author, publisher, description, image)
+    	VALUES (#{title}, #{author}, #{publisher}, #{description}, #{image})
+  	</insert>
+  	<select id="totalCount">
+  		select count(*) from books
+  		<where>
+        <if test="searchTerm != null and searchTerm != ''">
+            AND title LIKE '%' || #{searchTerm} || '%'
+        </if>
+        <if test="searchTerm != null and searchTerm != ''">
+            AND author LIKE '%' || #{searchTerm} || '%'
+        </if>
+   		 </where>
+  	</select>
+  	<select id="selectBookList" resultType="book">
+	select * from 
+		(select rownum as rnum, b.* from
+		    (select 
+		        id,
+		        title,
+		        author,
+		        publisher,
+		        image,
+		        stockCount,
+		        salesCount
+		    from books 
+		    <where>
+	        <if test="searchTerm != null and searchTerm != ''">
+	            title LIKE '%' || #{searchTerm} || '%'
+	        </if>
+	        <if test="searchTerm != null and searchTerm != ''">
+	            AND author LIKE '%' || #{searchTerm} || '%'
+	        </if>
+	   		 </where>
+		    order by id desc) b)
+	where rnum between #{start} and #{end}
+	</select>
+  	<update id="updateStock">
+  		update books set salesCount = #{stockCount} where id=#{id}
+  	</update>
+  	<delete id="deleteBook">
+  		delete books where id=#{id}
+  	</delete>
+  	<select id="selectBook" resultType="book">
+  		select * from books where id=#{id}
+  	</select>
+  	<update id="updateBook">
+  		update books set title=#{title}, author=#{author}, publisher=#{publisher} where id=#{id}
+  	</update>
+  
+</mapper>

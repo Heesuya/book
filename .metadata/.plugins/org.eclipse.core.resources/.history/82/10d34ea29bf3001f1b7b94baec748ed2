@@ -1,0 +1,20 @@
+package com.book.model.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.book.model.dto.BookDTO;
+
+import kr.co.iei.board.model.dto.BoardDTO;
+import kr.co.iei.board.model.dto.BoardFileDTO;
+import kr.co.iei.util.PageInfo;
+
+@Mapper
+public interface BookDao {
+
+	int insertBook(BookDTO bookDTO);
+
+	
+
+}

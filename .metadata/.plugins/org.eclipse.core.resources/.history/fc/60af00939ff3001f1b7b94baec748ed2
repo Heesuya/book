@@ -1,0 +1,18 @@
+package com.book.model.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.book.model.dao.BookDao;
+import com.book.model.dto.BookDTO;
+
+@Service
+public class BookService {
+	@Autowired
+	BookDao bookDao;
+
+	public int insertBook(BookDTO bookDTO) {
+		return bookDao.insertBook(bookDTO);
+	}
+
+}

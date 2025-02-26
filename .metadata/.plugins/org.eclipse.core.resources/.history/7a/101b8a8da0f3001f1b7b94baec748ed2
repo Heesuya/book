@@ -1,0 +1,40 @@
+package com.book.model.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.book.model.dao.BookDao;
+import com.book.model.dto.BookDTO;
+
+import kr.co.iei.util.PageInfo;
+import kr.co.iei.util.PageUtil;
+
+@Service
+public class BookService {
+	@Autowired
+	BookDao bookDao;
+	@Autowired
+	private PageUtil pageUtil;
+	
+	public int insertBook(BookDTO bookDTO) {
+		return bookDao.insertBook(bookDTO);
+	}
+
+	public Map selectBookList(int reqPage) {
+		//게시물 조회 및 페이징에 필요한 데이터를 모두 취합
+		int numPerPage = 10;	//한 페이지당 게시물 수
+		int pageNaviSize = 5;	//페이지네비 길이
+		int totalCount = bookDao.totalCount();//전체 게시물 수
+		PageInfo pi = pageUtil.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+		List list = bookDao.selectBoardList(pi);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("pi", pi);
+		return map;
+	}
+
+}

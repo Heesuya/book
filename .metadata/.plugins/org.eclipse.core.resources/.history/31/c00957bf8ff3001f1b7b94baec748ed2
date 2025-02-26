@@ -1,0 +1,6 @@
+package com.book.model.service;
+
+@ser
+public class BookService {
+
+}

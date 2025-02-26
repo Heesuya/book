@@ -1,0 +1,110 @@
+package com.book.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.book.model.dto.BookDTO;
+import com.book.model.service.BookService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
+@CrossOrigin("*")
+@RestController
+@RequestMapping(value = "/api")
+public class BookController {
+	
+	 @Autowired
+	private BookService bookService;
+	
+	@GetMapping("/search-books")
+	public ResponseEntity<Object> searchBooks(@RequestParam String query) {
+	    String clientId = "uCmeugznONViCnJzPBEC";
+	    String clientSecret = "tHHc_6vJxC";
+	    
+	    // API URL 설정
+	    String apiUrl = "https://openapi.naver.com/v1/search/book.xml?query=" + query + "&display=10&start=1";
+	    
+	    // 클라이언트 ID와 Secret을 헤더에 추가
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.set("X-Naver-Client-Id", clientId);
+	    headers.set("X-Naver-Client-Secret", clientSecret);
+	    
+	    // 요청 엔티티 생성
+	    HttpEntity<String> entity = new HttpEntity<>(headers);
+	    
+	    // RestTemplate을 이용해 GET 요청
+	    RestTemplate restTemplate = new RestTemplate();
+	    ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
+	    System.out.println(response);
+	    // XML 파싱을 위한 Jackson XmlMapper
+	    XmlMapper xmlMapper = new XmlMapper();
+	    
+	    try {
+	    	// XML 응답을 JSON 형식으로 변환
+	    	JsonNode rootNode = xmlMapper.readTree(response.getBody());
+	    	System.out.println("rootNode :" + rootNode);
+
+	    	// 필요한 필드만 추출 (예: book 리스트)
+	    	JsonNode itemsNode = rootNode.path("channel").path("item");
+	    	System.out.println("itemsNode: " + itemsNode);
+
+	    	// 책 리스트를 저장할 List<Map> 생성
+	    	List<Map<String, String>> bookList = new ArrayList<>();
+
+	    	// itemsNode가 배열인 경우 순회하여 각 항목 처리
+	    	for (JsonNode item : itemsNode) {
+	    	    Map<String, String> bookData = new HashMap<>();
+	    	    bookData.put("title", item.path("title").asText());
+	    	    bookData.put("image", item.path("image").asText());
+	    	    bookData.put("author", item.path("author").asText());
+	    	    bookData.put("publisher", item.path("publisher").asText());
+	    	    bookData.put("description", item.path("description").asText());
+	    	    
+	    	    // 리스트에 bookData 추가
+	    	    bookList.add(bookData);
+	    	}
+
+	    	// JSON 형식으로 반환
+	    	return ResponseEntity.ok(bookList);
+
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return ResponseEntity.status(500).body("Error parsing XML response");
+	    }
+	    
+	    
+	}
+	
+	@PostMapping
+	public ResponseEntity<String> addBook(@RequestBody BookDTO bookDTO) {
+		System.out.println("안");
+		// 여기서 bookDTO를 사용하여 데이터베이스에 책을 저장하거나 처리합니다.
+
+		// 책 저장 로직 (예: 데이터베이스에 책 저장)
+		// 예를 들어, bookService.save(bookDTO);
+
+		// 성공적으로 저장되면 응답
+		return ResponseEntity.ok("책이 성공적으로 추가되었습니다.");
+
+	}
+
+
+}

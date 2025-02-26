@@ -1,0 +1,52 @@
+package com.book.controller;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.book.model.dto.BookDTO;
+import com.book.model.service.BookService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+
+@CrossOrigin("*")
+@RestController
+@RequestMapping(value = "/api/books")
+public class BookContreller {
+	
+	 @Autowired
+	private BookService bookService;
+	
+	 @PostMapping
+	 public ResponseEntity<String> addBook(@RequestBody BookDTO bookDTO) {
+	        // 여기서 bookDTO를 사용하여 데이터베이스에 책을 저장하거나 처리합니다.
+	        try {
+	            // 책 저장 로직 (예: 데이터베이스에 책 저장)
+	            // 예를 들어, bookService.save(bookDTO);
+	            
+	            // 성공적으로 저장되면 응답
+	            return ResponseEntity.ok("책이 성공적으로 추가되었습니다.");
+	    }
+	    
+	}
+	
+	
+
+
+}

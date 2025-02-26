@@ -1,0 +1,12 @@
+package com.book.model.dao;
+
+
+import com.book.model.dto.BookDTO;
+
+
+@Mapper
+public interface BookDao {
+
+	int insertBook(BookDTO bookDTO);
+
+}

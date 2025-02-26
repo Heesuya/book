@@ -1,0 +1,73 @@
+package com.book.model.service;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.book.model.dao.BookDao;
+import com.book.model.dto.BookDTO;
+import com.book.util.PageInfo;
+import com.book.util.PageUtil;
+
+
+
+@Service
+public class BookService {
+	@Autowired
+	BookDao bookDao;
+	@Autowired
+	private PageUtil pageUtil;
+	
+	public int insertBook(BookDTO bookDTO) {
+		return bookDao.insertBook(bookDTO);
+	}
+
+	public Map selectBookList(int reqPage, String searchTerm) {
+		//게시물 조회 및 페이징에 필요한 데이터를 모두 취합
+		int numPerPage = 10;	//한 페이지당 게시물 수
+		int pageNaviSize = 5;	//페이지네비 길이
+		int totalCount;//전체 게시물 수
+		  if (searchTerm.isEmpty()) {
+		        totalCount = bookDao.totalCount();  // 전체 게시물 수
+		    } else {
+		        totalCount = bookDao.totalCountBySearchTerm(searchTerm);  // 검색어에 맞는 게시물 수
+		    }
+		PageInfo pi = pageUtil.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+		System.out.println(pi);
+	System.out.println("searchTerm : "+searchTerm);
+		List list;
+	    if (searchTerm.isEmpty()) {
+	        list = bookDao.selectBookList(pi);  // 전체 책 목록
+	    } else {
+	        list = bookDao.selectBookListBySearchTerm(pi, searchTerm);  // 검색된 책 목록
+	    }
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("pi", pi);
+		return map;
+	}
+
+	public int updateStock(Integer id, Integer stockCount) {
+		// TODO Auto-generated method stub
+		return bookDao.updateStock(id, stockCount);
+	}
+
+	public int deleteBook(int id) {
+		// TODO Auto-generated method stub
+		return bookDao.deleteBook(id);
+	}
+
+	public BookDTO selectBook(int id) {
+		// TODO Auto-generated method stub
+		return bookDao.selectBook(id);
+	}
+
+	public int updateBook(BookDTO book) {
+		// TODO Auto-generated method stub
+		return bookDao.updateBook(book);
+	}
+
+}

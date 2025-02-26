@@ -1,0 +1,27 @@
+spring.application.name=book_back
+#server port setting
+server.port=9999
+
+#oracle setting 
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@127.0.0.1:1521/xe
+spring.datasource.username=book_system
+spring.datasource.password=1234
+
+
+#mybatis setting 
+mybatis.configuration.map-underscore-to-camel-case=true
+mybatis.mapper-locations=classpath:com/book/model/dao/*.xml
+
+#jwt settings
+jwt.secret-key=kh.web.secret.code.dangsan.aclass.long.long.long
+jwt.expire-hour=1
+jwt.expire-hour-refresh=8760
+
+#file upload loaction    \   ->  /  change
+file.root=/home/ubuntu/files
+
+
+#file upload settings                                 all file ==>  max-request-size
+spring.servlet.multipart.max-file-size = 10MB
+spring.servlet.multipart.max-request-size=50MB   
