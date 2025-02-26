@@ -6,13 +6,13 @@
 - 정보 바탕으로 수정가능
 ![책 등록](https://github.com/Heesuya/book/raw/main/readme/책%20등록하기.gif)
 
-### 2. `검색 기능과 상세보기.gif`
+### 2. `페이지 보기와 검색기능.gif`
 - 실시간으로 검색할 수 있는 검색기능
-- 책 상세내용 보기 
+- 페이지 네이 
 ![검색 기능과 상세보기](https://github.com/Heesuya/book/raw/main/readme/북리스트와%20검색기능.gif)
 
 ### 3. `수정하기기능.gif`
-- 원하는 정보로 수정 기능 
+- 기존 글 원하는 정보로 수정 기능 
 ![수정하기기능](https://github.com/Heesuya/book/raw/main/readme/책정보수정.gif)
 
 ### 4. `재고수정과 삭제 기능.gif`
