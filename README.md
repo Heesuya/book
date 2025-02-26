@@ -1,5 +1,21 @@
 # 도서관리를 위한 웹 프로그램 
 
+
+## 기술 스택
+
+- **운영체제**: macOS
+- **사용언어**: Java, JavaScript, HTML5, CSS3
+- **사용기술**: Spring Framework, React, REST API, MyBatis
+- **Framework/Library**: Node.js, Spring Framework
+- **DB**: Oracle 11g
+- **Tool**: Visual Studio Code, STS, SQL Developer
+- **Collaboration**: GitHub, ERD
+
+
+aws s3 를 이용한 배포 주소
+http://my-first-book-story-dlqslek.s3-website.ap-northeast-2.amazonaws.com/
+
+
 ## 동영상 예시
 ### 1. `책 등록.gif`
 - 네이버 책 검색 API 연동하여 책 검색 후 정보 간편하게 불러오기
@@ -20,16 +36,3 @@
 - 삭제 기능
 ![재고수정과 삭제](https://github.com/Heesuya/book/raw/main/readme/재고수정과삭제.gif)
 
-## 기술 스택
-
-- **운영체제**: macOS
-- **사용언어**: Java, JavaScript, HTML5, CSS3
-- **사용기술**: Spring Framework, React, REST API, MyBatis
-- **Framework/Library**: Node.js, Spring Framework
-- **DB**: Oracle 11g
-- **Tool**: Visual Studio Code, STS, SQL Developer
-- **Collaboration**: GitHub, ERD
-
-
-aws s3 를 이용한 배포 주소
-http://my-first-book-story-dlqslek.s3-website.ap-northeast-2.amazonaws.com/
